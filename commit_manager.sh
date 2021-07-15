@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Configs
-directory="./"
+directory="c:/Users/Aleksuei\ Riabtsev/Development/Personal/Github/commit_manager/"
 
 remote="ar"
 main_branch="notes"
@@ -113,7 +113,7 @@ prev_check() {
 
 main() {
 
-  echo -e "\n\n===Running Script===\n :at $0 \n :on $(date) \n :with $num_changes changes \n"
+  echo -e "/n/n===Running Script===/n :at $0 /n :on $(date) /n :with $num_changes changes /n"
 
   prev_check
 
