@@ -62,7 +62,7 @@ commit_and_push() {
 
 commit_and_push_set_tracking() {
   git checkout $1
-1
+
   create_commit
 
   git push -u $remote $1
