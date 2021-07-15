@@ -1,7 +1,10 @@
 #!/bin/bash
 
 # Configs
-directory="/home/xypnox/notes/"
+directory="./"
+
+remote="ar"
+main_branch="notes"
 
 cd $directory
 
@@ -54,28 +57,28 @@ commit_and_push() {
 
   create_commit
 
-  git push origin $1
+  git push $remote $1
 }
 
 commit_and_push_set_tracking() {
   git checkout $1
-
+1
   create_commit
 
-  git push -u origin $1
+  git push -u $remote $1
 }
 
 create_squash_commit_push() {
   # Create squash commit from $1
-  git checkout main
+  git checkout $main_branch
 
-  local gcherry=`git cherry -v main $1`
+  local gcherry=`git cherry -v $main_branch $1`
 
   git merge --squash $1
 
   create_commit $date_human
 
-  git push origin main
+  git push $remote $main_branch
 }
 
 prev_check() {
@@ -85,7 +88,7 @@ prev_check() {
   if [ -n "$prev_branch_exists" ]; then
     echo "Prev branch not deleted, processing!"
 
-    git_is_merged main $prev_branch
+    git_is_merged $main_branch $prev_branch
     is_merged=$?
     echo $is_merged
 
@@ -98,9 +101,9 @@ prev_check() {
     fi
 
     # Delete prev day's branch
-    git checkout main
+    git checkout $main_branch
     git branch -D $prev_branch
-    git push --delete origin $prev_branch
+    git push --delete $remote $prev_branch
 
   else
     echo "Prev branch doesn't exist skipping"
@@ -120,7 +123,7 @@ main() {
     commit_and_push $branch
   else
     echo "Daily Branch doesn't exist!"
-    git checkout main
+    git checkout $main_branch
     git checkout -b $branch
     commit_and_push_set_tracking $branch
   fi
